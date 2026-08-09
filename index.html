@@ -418,6 +418,13 @@
     border-left:3px solid var(--green); padding-left:14px;
     font-size:13.5px; color:var(--text-dim); line-height:1.7;
   }
+  .detail-pdf-link{
+    display:inline-flex; align-items:center; gap:8px; margin-top:18px;
+    background:var(--surface-2); color:var(--text); text-decoration:none;
+    font-size:13px; font-weight:700; padding:10px 18px; border-radius:24px;
+    border:1px solid rgba(255,255,255,.12); transition:background .15s, color .15s;
+  }
+  .detail-pdf-link:hover{ background:var(--green); color:#000; }
 </style>
 </head>
 <body>
@@ -443,7 +450,7 @@
       <div class="library-list">
         <div class="library-item" onclick="openPanel('case','case1')">
           <div class="lib-art p1">🗂️</div>
-          <div class="lib-info"><strong>[Case Study 1]</strong><span>[Industry] · [Year]</span></div>
+          <div class="lib-info"><strong>Finding Signal in the Noise</strong><span>Product Strategy · 2026</span></div>
         </div>
         <div class="library-item" onclick="openPanel('case','case2')">
           <div class="lib-art p2">🗂️</div>
@@ -489,7 +496,7 @@
       <div class="view active" id="view-home">
         <div class="hero-wrap">
           <div class="hero">
-            <div class="hero-avatar"><img src="Profile.jpg" alt="Tanushree Poojary"></div>
+            <div class="hero-avatar"><img src="pic.JPG" alt="Tanushree Poojary"></div>
             <div class="hero-meta">
               <p class="label">Profile</p>
               <h1>Tanushree Poojary</h1>
@@ -589,8 +596,8 @@
         <div class="card-grid">
           <div class="card" onclick="openPanel('case','case1')">
             <div class="card-art p1">🗂️<div class="card-play" onclick="event.stopPropagation(); playTrack('case','case1')">▶</div></div>
-            <div class="card-title">[Case Study 1]</div>
-            <div class="card-sub">[Industry] · [Outcome / metric]</div>
+            <div class="card-title">Finding Signal in the Noise</div>
+            <div class="card-sub">Product Strategy · WhatsApp Channels discovery</div>
           </div>
           <div class="card" onclick="openPanel('case','case2')">
             <div class="card-art p2">🗂️<div class="card-play" onclick="event.stopPropagation(); playTrack('case','case2')">▶</div></div>
@@ -746,6 +753,7 @@
     <div class="detail-timeline" id="detailBullets"></div>
     <div class="detail-tags" id="detailTags"></div>
     <div class="detail-desc" id="detailDesc"></div>
+    <a class="detail-pdf-link" id="detailPdfLink" href="#" target="_blank" rel="noopener" style="display:none;">📄 View full case study (PDF)</a>
   </div>
 </div>
 
@@ -821,10 +829,16 @@
   var COLORS = {p1:'#e0433e', p2:'#c9a6f5', p3:'#151515', p4:'#b6e59e', p5:'#3e7ce0', p6:'#2a2f66', p7:'#f4f1e8'};
 
   var CASE = {
-    case1: { title:'[Case Study 1]', icon:'🗂️', color:'p1', tag:'CASE STUDY',
-      tags:['[Industry]','[Year]'],
-      bullets:['[Add a highlight or outcome for this case study.]'],
-      desc:'[Placeholder — send me the title, industry, and 2–3 highlights for this case study and I\'ll fill it in.]' },
+    case1: { title:'Finding Signal in the Noise', icon:'🗂️', color:'p1', tag:'CASE STUDY',
+      pdf:'WhatsApp_Channels_Discovery_Case_Study_Final.pdf',
+      tags:['Product Strategy','WhatsApp / Meta · 2026'],
+      bullets:[
+        'Diagnosed why Channels’ name-only search and static category directory can’t support Meta’s 2026 paid-subscription rollout, benchmarking against Telegram, Instagram Broadcast, and X Communities.',
+        'Synthesized research into two personas — an interest-driven seeker and an emerging creator — exposing discovery friction on both sides of the marketplace.',
+        'Prioritized four problems by business leverage and proposed a phased 4-layer solution: intent search, personalized recommendations, contextual resurfacing, and opt-in web indexing.',
+        'Defined a north-star metric (% of follows from search/recommendation vs. external links) and a 3-phase GTM rollout with adoption, success, and guardrail metrics.'
+      ],
+      desc:'A product strategy case study proposing how WhatsApp should fix Channels discovery to support Meta’s 2026 paid-subscription rollout — covering competitive landscape, user research, a prioritized problem set, a phased solution, and a GTM plan with defined success metrics.' },
     case2: { title:'[Case Study 2]', icon:'🗂️', color:'p2', tag:'CASE STUDY',
       tags:['[Industry]','[Year]'],
       bullets:['[Add a highlight or outcome for this case study.]'],
@@ -935,6 +949,14 @@
     document.getElementById('detailTitle').textContent = data.title;
     document.getElementById('detailDesc').textContent = data.desc;
 
+    var pdfLinkEl = document.getElementById('detailPdfLink');
+    if(data.pdf){
+      pdfLinkEl.href = data.pdf;
+      pdfLinkEl.style.display = 'inline-flex';
+    } else {
+      pdfLinkEl.style.display = 'none';
+    }
+
     var tagsEl = document.getElementById('detailTags');
     tagsEl.innerHTML = '';
     data.tags.forEach(function(t){
@@ -985,6 +1007,17 @@
   var progressTimer = null;
   var noteTimer = null;
   var masterVolume = 0.7;
+  var currentTrackId = PLAYLIST[0];
+
+  var SONGS = {
+    case1: { scale:[261.63,293.66,329.63,349.23,392.00,440.00,493.88,523.25], tempo:380, wave:'sine' },
+    case2: { scale:[220.00,246.94,261.63,293.66,329.63,349.23,392.00,415.30], tempo:340, wave:'triangle' },
+    case3: { scale:[196.00,220.00,233.08,261.63,293.66,311.13,349.23,392.00], tempo:420, wave:'sawtooth' },
+    case4: { scale:[329.63,369.99,392.00,440.00,493.88,554.37,587.33,659.25], tempo:300, wave:'square' },
+    case5: { scale:[174.61,196.00,207.65,233.08,261.63,277.18,311.13,349.23], tempo:460, wave:'sine' },
+    case6: { scale:[246.94,277.18,293.66,329.63,369.99,392.00,440.00,466.16], tempo:360, wave:'triangle' }
+  };
+  var DEFAULT_SONG = { scale:[261.63,293.66,329.63,349.23,392.00,440.00,493.88,523.25], tempo:380, wave:'sine' };
 
   function getCtx(){
     if(!audioCtx){ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
@@ -1027,28 +1060,29 @@
     if(noteTimer){ clearInterval(noteTimer); noteTimer = null; }
   }
 
-  function startTone(){
+  function startTone(id){
     stopTone();
     var ctx = getCtx();
     if(ctx.state === 'suspended'){ ctx.resume(); }
-    var scale = [261.63,293.66,329.63,349.23,392.00,440.00,493.88,523.25];
+    var song = SONGS[id] || DEFAULT_SONG;
+    var scale = song.scale;
     var i = 0;
     function playNote(){
       var freq = scale[i % scale.length];
       i++;
       var osc = ctx.createOscillator();
       var gain = ctx.createGain();
-      osc.type = 'sine';
+      osc.type = song.wave;
       osc.frequency.value = freq;
       gain.gain.setValueAtTime(0, ctx.currentTime);
       gain.gain.linearRampToValueAtTime(0.08 * masterVolume, ctx.currentTime + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + song.tempo/1000 - 0.03);
       osc.connect(gain); gain.connect(ctx.destination);
       osc.start();
-      osc.stop(ctx.currentTime + 0.4);
+      osc.stop(ctx.currentTime + song.tempo/1000);
     }
     playNote();
-    noteTimer = setInterval(playNote, 380);
+    noteTimer = setInterval(playNote, song.tempo);
   }
 
   function stopProgress(){
@@ -1077,6 +1111,7 @@
   function playTrack(type, id){
     var idx = PLAYLIST.indexOf(id);
     if(type === 'case' && idx !== -1){ currentIndex = idx; }
+    currentTrackId = id;
     updateNowPlayingUI(type, id);
     elapsed = 0;
     document.getElementById('npBarFill').style.width = '0%';
@@ -1084,7 +1119,7 @@
     document.getElementById('npDuration').textContent = fmtRemaining(0);
     isPlaying = true;
     setPlayIcon(true);
-    startTone();
+    startTone(id);
     startProgress();
   }
 
@@ -1097,7 +1132,7 @@
     } else {
       isPlaying = true;
       setPlayIcon(true);
-      startTone();
+      startTone(currentTrackId);
       startProgress();
     }
   }
