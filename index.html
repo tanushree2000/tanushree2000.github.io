@@ -174,7 +174,9 @@
     box-shadow:0 8px 40px rgba(0,0,0,.6);
     flex-shrink:0;
     border:1px solid #2a2a2a;
+    overflow:hidden;
   }
+  .hero-avatar img{width:100%; height:100%; object-fit:cover;}
   .hero-meta p.label{font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--text-dim); margin-bottom:6px;}
   .hero-meta h1{font-size:52px; font-weight:800; line-height:1.05; margin-bottom:14px;}
   .hero-meta .hero-tagline{font-size:15px; color:var(--text-dim);}
@@ -487,7 +489,7 @@
       <div class="view active" id="view-home">
         <div class="hero-wrap">
           <div class="hero">
-            <div class="hero-avatar">TP</div>
+            <div class="hero-avatar"><img src="pic.JPG" alt="Tanushree Poojary"></div>
             <div class="hero-meta">
               <p class="label">Profile</p>
               <h1>Tanushree Poojary</h1>
@@ -531,31 +533,31 @@
           <div class="section-head"><h2>Career Highlights</h2><span class="see-all">Show all</span></div>
           <div class="card-grid">
             <div class="card" onclick="openPanel('emp','uiuc')">
-              <div class="card-art logo-art"><img src="logos/uiuc.png" alt="University of Illinois Urbana-Champaign"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','uiuc')">▶</div></div>
+              <div class="card-art logo-art"><img src="uiuc.png" alt="University of Illinois Urbana-Champaign"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','uiuc')">▶</div></div>
               <div class="card-title">Univ. of Illinois Urbana-Champaign</div>
               <div class="card-sub">Data Analyst</div>
               <div class="card-sub">Jun 2025–May 2026 · Higher Ed</div>
             </div>
             <div class="card" onclick="openPanel('emp','bi')">
-              <div class="card-art logo-art"><img src="logos/big.jpeg" alt="Business Intelligence Group"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','bi')">▶</div></div>
+              <div class="card-art logo-art"><img src="big.jpeg" alt="Business Intelligence Group"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','bi')">▶</div></div>
               <div class="card-title">Business Intelligence Group</div>
               <div class="card-sub">Technical Project Manager</div>
               <div class="card-sub">Aug–Dec 2025 · Compliance / BI</div>
             </div>
             <div class="card" onclick="openPanel('emp','cog')">
-              <div class="card-art logo-art"><img src="logos/cognizant.png" alt="Cognizant Technology Solutions"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','cog')">▶</div></div>
+              <div class="card-art logo-art"><img src="cognizant.png" alt="Cognizant Technology Solutions"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','cog')">▶</div></div>
               <div class="card-title">Cognizant Technology Solutions</div>
               <div class="card-sub">Programmer Analyst</div>
               <div class="card-sub">Oct 2022–Aug 2024 · Insurance / B2B SaaS</div>
             </div>
             <div class="card" onclick="openPanel('emp','mte')">
-              <div class="card-art logo-art"><img src="logos/mte.png" alt="MedTourEasy"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','mte')">▶</div></div>
+              <div class="card-art logo-art"><img src="mte.png" alt="MedTourEasy"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','mte')">▶</div></div>
               <div class="card-title">MedTourEasy</div>
               <div class="card-sub">[Your Role]</div>
               <div class="card-sub">[Dates] · [Industry]</div>
             </div>
             <div class="card" onclick="openPanel('emp','spark')">
-              <div class="card-art logo-art"><img src="logos/spark.jpeg" alt="The Spark Foundation"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','spark')">▶</div></div>
+              <div class="card-art logo-art"><img src="spark.jpeg" alt="The Spark Foundation"><div class="card-play" onclick="event.stopPropagation(); playTrack('emp','spark')">▶</div></div>
               <div class="card-title">The Spark Foundation</div>
               <div class="card-sub">[Your Role]</div>
               <div class="card-sub">[Dates] · [Industry]</div>
@@ -847,7 +849,7 @@
 
   var EMP = {
     bi: {
-      title:'Business Intelligence Group', icon:'B', img:'logos/big.jpeg', color:'p2', tag:'EMPLOYER',
+      title:'Business Intelligence Group', icon:'B', img:'big.jpeg', color:'p2', tag:'EMPLOYER',
       tags:['Compliance / BI','Champaign, IL'],
       bullets:[
         {role:'Technical Project Manager', dates:'Aug 2025–Dec 2025'}
@@ -855,7 +857,7 @@
       desc:"Owned product roadmap, backlog, and sprint delivery for Salud Revenue Partners' compliance knowledge base, and drove engineering tradeoffs on a Gen AI chatbot integration while managing risk escalation with Legal."
     },
     uiuc: {
-      title:'Univ. of Illinois Urbana-Champaign', icon:'U', img:'logos/uiuc.png', color:'p4', tag:'EMPLOYER',
+      title:'Univ. of Illinois Urbana-Champaign', icon:'U', img:'uiuc.png', color:'p4', tag:'EMPLOYER',
       tags:['Higher Ed','Champaign, IL'],
       bullets:[
         {role:'Data Analyst', dates:'Jun 2025–May 2026'}
@@ -863,7 +865,7 @@
       desc:'Built Tableau dashboards for consumer insights and automated grant allocation forecasting with SQL and Python, improving budget planning accuracy 25%.'
     },
     cog: {
-      title:'Cognizant Technology Solutions', icon:'C', img:'logos/cognizant.png', color:'p5', tag:'EMPLOYER',
+      title:'Cognizant Technology Solutions', icon:'C', img:'cognizant.png', color:'p5', tag:'EMPLOYER',
       tags:['Insurance / B2B SaaS','Pune, India'],
       bullets:[
         {role:'Programmer Analyst', dates:'Oct 2022–Aug 2024'}
@@ -871,7 +873,7 @@
       desc:"Led SDLC execution for AIG's compliant B2B SaaS data systems, designed Spark/Snowflake ETL pipelines for 10M+ records, and resolved 30+ critical data quality issues."
     },
     mte: {
-      title:'MedTourEasy', icon:'M', img:'logos/mte.png', color:'p6', tag:'EMPLOYER',
+      title:'MedTourEasy', icon:'M', img:'mte.png', color:'p6', tag:'EMPLOYER',
       tags:['[Industry]','[Location]'],
       bullets:[
         {role:'[Your Role]', dates:'[Dates]'}
@@ -879,7 +881,7 @@
       desc:'[Placeholder — send me the role, dates, and 1–2 highlights from this one and I\'ll fill in the real details.]'
     },
     spark: {
-      title:'The Spark Foundation', icon:'S', img:'logos/spark.jpeg', color:'p7', tag:'EMPLOYER',
+      title:'The Spark Foundation', icon:'S', img:'spark.jpeg', color:'p7', tag:'EMPLOYER',
       tags:['[Industry]','[Location]'],
       bullets:[
         {role:'[Your Role]', dates:'[Dates]'}
